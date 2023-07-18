@@ -20,17 +20,20 @@ for tr in table_rows:
     td = tr.find_all('td')
     row_td = [val.text.strip() for val in td if val.text.strip()]
     
-    if row_td:
+    if row_td[0] in dropvalues:
+        res_td.append(opencc.OpenCC('s2hk').convert(row_td[1]))
+    else:
         res_td.append(opencc.OpenCC('s2hk').convert(row_td[0]))
 
 df = pd.DataFrame(res_td,columns=['國家名'])
-df = df[df.國家名.isin(dropvalues) == False]
+df = df[1:]
+#df = df[df.國家名.isin(dropvalues) == False]
 df = df.reset_index()
 df = df.drop(columns=['index'])
 
 print(df)
 
-df.to_excel("Data/China.xlsx", index=False)
+df.to_excel("China.xlsx", index=False)
 
 
 
