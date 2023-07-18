@@ -20,7 +20,7 @@ for tr in table_rows:
     td = tr.find_all('td')
     row_td = [val.text.strip() for val in td if val.text.strip()]
     
-    if row_td[0] in dropvalues:
+    if opencc.OpenCC('s2hk').convert(row_td[0]) in dropvalues:
         res_td.append(opencc.OpenCC('s2hk').convert(row_td[1]))
     else:
         res_td.append(opencc.OpenCC('s2hk').convert(row_td[0]))
